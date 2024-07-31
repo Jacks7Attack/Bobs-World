@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbl5mo6dfaxjw"]
+
+[ext_resource type="Script" path="res://Area2D.gd" id="1_eqkuh"]
+[ext_resource type="Texture2D" uid="uid://dahkvh5jqef6v" path="res://sign.png" id="1_g6cp7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fah8q"]
+size = Vector2(20, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d617j"]
+size = Vector2(16, 9)
+
+[node name="Sign" type="StaticBody2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_eqkuh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_fah8q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_g6cp7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_d617j")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

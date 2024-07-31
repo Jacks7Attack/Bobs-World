@@ -1,0 +1,147 @@
+[gd_scene load_steps=18 format=3 uid="uid://bp1v1b3vnko7u"]
+
+[ext_resource type="Script" path="res://Enemy.gd" id="1_cp024"]
+[ext_resource type="Texture2D" uid="uid://c78x5vkdg2hbr" path="res://bobalt.png" id="2_l2v0w"]
+[ext_resource type="AudioStream" uid="uid://dtg12576kuqgd" path="res://footstep pixelated.wav" id="3_qipge"]
+[ext_resource type="Texture2D" uid="uid://ctd6ocwyvdctw" path="res://wind.png" id="4_iapmw"]
+[ext_resource type="AudioStream" uid="uid://c12m7bpu108a7" path="res://cannon ball hit.wav" id="5_04hkq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgknp"]
+atlas = ExtResource("2_l2v0w")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a74u6"]
+atlas = ExtResource("2_l2v0w")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtes4"]
+atlas = ExtResource("2_l2v0w")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5un88"]
+atlas = ExtResource("2_l2v0w")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw7fj"]
+atlas = ExtResource("2_l2v0w")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ac1xt"]
+atlas = ExtResource("2_l2v0w")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiwx6"]
+atlas = ExtResource("2_l2v0w")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5hh6"]
+atlas = ExtResource("2_l2v0w")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bml07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgknp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a74u6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtes4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5un88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw7fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ac1xt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qiwx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5hh6")
+}],
+"loop": true,
+"name": &"move",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6octt"]
+size = Vector2(9, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66c5g"]
+size = Vector2(9, 1)
+
+[sub_resource type="Gradient" id="Gradient_sxhf5"]
+colors = PackedColorArray(1, 1, 1, 1, 0.241156, 0.241156, 0.241156, 0)
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_cp024")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_bml07")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_6octt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -6.495)
+shape = SubResource("RectangleShape2D_66c5g")
+
+[node name="Left" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(-6, 0)
+
+[node name="Right" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(5.1, 0)
+
+[node name="footstep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qipge")
+max_distance = 150.0
+attenuation = 0.307786
+
+[node name="Feet Point" type="Marker2D" parent="."]
+position = Vector2(0, 7)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Feet Point"]
+texture_filter = 1
+texture_repeat = 1
+emitting = false
+amount = 3
+lifetime = 1.5
+texture = ExtResource("4_iapmw")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(-1, -0.135)
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.2
+initial_velocity_max = 15.2
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+linear_accel_max = 0.5
+scale_amount_min = 0.3
+scale_amount_max = 0.6
+color_ramp = SubResource("Gradient_sxhf5")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_04hkq")
+volume_db = 9.515
+max_distance = 150.0
+attenuation = 0.307786
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

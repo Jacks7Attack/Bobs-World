@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8tlvaxymgu2v"]
+
+[ext_resource type="Script" path="res://cannon_ball.gd" id="1_88ekw"]
+[ext_resource type="Texture2D" uid="uid://b8xv5rg38ut1d" path="res://cannon ball.png" id="1_l4soc"]
+[ext_resource type="AudioStream" uid="uid://c12m7bpu108a7" path="res://cannon ball hit.wav" id="3_r6ucp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oikoe"]
+size = Vector2(12.81, 10.285)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qoru8"]
+size = Vector2(12, 2)
+
+[node name="Cannon Ball" type="Node2D"]
+script = ExtResource("1_88ekw")
+speed = 25.0
+spriteScale = Vector2(0.8, 0.8)
+survivalTime = 4.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_l4soc")
+
+[node name="death area" type="Area2D" parent="."]
+position = Vector2(-8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="death area"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_oikoe")
+
+[node name="stop area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stop area"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_qoru8")
+
+[node name="stop area2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="stop area2"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_qoru8")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_r6ucp")
+volume_db = 6.34
+max_distance = 150.0
+attenuation = 0.307786
+
+[connection signal="body_entered" from="death area" to="." method="_on_death_area_body_entered"]
+[connection signal="body_entered" from="stop area" to="." method="_on_stop_area_body_entered"]
+[connection signal="body_entered" from="stop area2" to="." method="_on_stop_area_2_body_entered"]

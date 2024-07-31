@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjt7vgn3pbl2m"
+path="res://.godot/imported/nes test.wav-ca9c9c6ad9f01f17cd01741f87fd6de2.sample"
+
+[deps]
+
+source_file="res://nes test.wav"
+dest_files=["res://.godot/imported/nes test.wav-ca9c9c6ad9f01f17cd01741f87fd6de2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

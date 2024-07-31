@@ -1,0 +1,580 @@
+[gd_scene load_steps=18 format=3 uid="uid://tvojw5p36vy0"]
+
+[ext_resource type="Script" path="res://Menu.gd" id="1_2nrws"]
+[ext_resource type="Script" path="res://Continue.gd" id="2_b35n4"]
+[ext_resource type="Texture2D" uid="uid://cdswsgndeymtx" path="res://button.png" id="3_x28im"]
+[ext_resource type="FontFile" uid="uid://bnxaswqwgr445" path="res://PublicPixel.ttf" id="4_6pok0"]
+[ext_resource type="AudioStream" uid="uid://b2bluje5w12e4" path="res://click.wav" id="5_eqhfm"]
+[ext_resource type="Texture2D" uid="uid://b6p65rdhjjtto" path="res://exit.png" id="6_ui2v6"]
+[ext_resource type="Texture2D" uid="uid://ckeagq4dqq3on" path="res://button but white.png" id="7_lnntv"]
+[ext_resource type="Texture2D" uid="uid://bgnjmorm5ifxj" path="res://checkmark.png" id="8_byifi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hll0k"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dpv3d"]
+font = ExtResource("4_6pok0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gh7l0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="GDScript" id="GDScript_ehfjd"]
+script/source = "extends Button
+
+@onready var background = $Background
+@onready var beginModulate = background.modulate
+@onready var optionsMenu = $\"../OptionsMenu\"
+@onready var audio = $AudioStreamPlayer
+@onready var menu = $\"../..\"
+
+@export var divideAmountForHover = 1.3
+var player
+
+func _ready():
+	for i in get_tree().root.get_children():
+		for i2 in i.get_children():
+			if i2.is_in_group(\"Player\"):
+				player = i2
+				
+func _pressed():
+	optionsMenu.visible = not optionsMenu.visible
+	audio.play()
+
+func _physics_process(_delta):
+	if is_hovered():
+		var mod = background.modulate
+		
+		mod.r = beginModulate.r / divideAmountForHover
+		mod.g = beginModulate.g / divideAmountForHover
+		mod.b = beginModulate.b / divideAmountForHover
+		
+		background.modulate = mod
+	else:
+		background.modulate = beginModulate
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ipg2"]
+font = ExtResource("4_6pok0")
+font_size = 8
+shadow_size = 0
+
+[sub_resource type="GDScript" id="GDScript_hpc31"]
+script/source = "extends Button
+
+@onready var background = $Background
+@onready var beginModulate = background.modulate
+@onready var audio = $AudioStreamPlayer
+@onready var optionsMenu = $\"..\"
+
+@export var divideAmountForHover = 1.3
+var player
+
+func _ready():
+	for i in get_tree().root.get_children():
+		for i2 in i.get_children():
+			if i2.is_in_group(\"Player\"):
+				player = i2
+				
+func _pressed():
+	optionsMenu.visible = not visible
+	audio.play()
+
+func _physics_process(_delta):
+	if is_hovered():
+		var mod = background.modulate
+		
+		mod.r = beginModulate.r / divideAmountForHover
+		mod.g = beginModulate.g / divideAmountForHover
+		mod.b = beginModulate.b / divideAmountForHover
+		
+		background.modulate = mod
+	else:
+		background.modulate = beginModulate
+"
+
+[sub_resource type="GDScript" id="GDScript_twvc2"]
+script/source = "extends Button
+
+@onready var background = $Background
+@onready var beginModulate = background.modulate
+@onready var optionsMenu = $\"..\"
+@onready var audio = $AudioStreamPlayer
+@onready var anim = $Sprite
+@onready var menu = $\"../..\"
+
+@export var divideAmountForHover = 1.3
+var player
+
+func _ready():
+	for i in get_tree().root.get_children():
+		for i2 in i.get_children():
+			if i2.is_in_group(\"Player\"):
+				player = i2
+				
+func _pressed():
+	audio.play()
+	player.noMusic = not player.noMusic
+	
+	player.saveData()
+	
+	if player.noMusic == false:
+		player.deafenMusicNow()
+	else:
+		player.normalizeMusicNow()
+
+func _physics_process(_delta):
+	if is_hovered():
+		var mod = background.modulate
+		mod.r = beginModulate.r / divideAmountForHover
+		mod.g = beginModulate.g / divideAmountForHover
+		mod.b = beginModulate.b / divideAmountForHover
+		
+		background.modulate = mod
+	else:
+		background.modulate = beginModulate
+	
+	if player.noMusic == true:
+		anim.play(\"no\")
+	else:
+		anim.play(\"yes\")
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6bhd1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ui2v6")
+}],
+"loop": true,
+"name": &"no",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_byifi")
+}],
+"loop": true,
+"name": &"yes",
+"speed": 0.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_t3icl"]
+script/source = "extends Button
+
+@onready var background = $Background
+@onready var beginModulate = background.modulate
+@onready var optionsMenu = $\"..\"
+@onready var audio = $AudioStreamPlayer
+@onready var anim = $Sprite
+@onready var menu = $\"../..\"
+
+@export var divideAmountForHover = 1.3
+var player
+
+func _ready():
+	for i in get_tree().root.get_children():
+		for i2 in i.get_children():
+			if i2.is_in_group(\"Player\"):
+				player = i2
+				
+func _pressed():
+	audio.play()
+	player.canJumpCancel = not player.canJumpCancel
+	
+	player.saveData()
+
+func _physics_process(_delta):
+	if is_hovered():
+		var mod = background.modulate
+		mod.r = beginModulate.r / divideAmountForHover
+		mod.g = beginModulate.g / divideAmountForHover
+		mod.b = beginModulate.b / divideAmountForHover
+		
+		background.modulate = mod
+	else:
+		background.modulate = beginModulate
+	
+	if player.canJumpCancel == true:
+		anim.play(\"yes\")
+	else:
+		anim.play(\"no\")
+"
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 80.587
+offset_right = 1920.0
+offset_bottom = 1160.59
+scale = Vector2(0.135, 0.135)
+script = ExtResource("1_2nrws")
+
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Continue" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = -314.099
+offset_top = -866.585
+offset_right = 323.391
+offset_bottom = -728.375
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_hll0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hll0k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hll0k")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_hll0k")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hll0k")
+script = ExtResource("2_b35n4")
+
+[node name="Background" type="NinePatchRect" parent="Buttons/Continue"]
+modulate = Color(1.75, 1.75, 1.75, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 3.05176e-05
+offset_top = -3.06932
+offset_right = 64.0
+offset_bottom = 10.9307
+scale = Vector2(10, 10)
+texture = ExtResource("3_x28im")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label3" type="Label" parent="Buttons/Continue"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 35.9116
+offset_top = 35.6048
+offset_right = 211.912
+offset_bottom = 58.6048
+scale = Vector2(3.973, 3.973)
+text = "Continue!"
+label_settings = SubResource("LabelSettings_dpv3d")
+
+[node name="Label4" type="Label" parent="Buttons/Continue"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 41.4365
+offset_top = 31.4611
+offset_right = 217.436
+offset_bottom = 54.4611
+scale = Vector2(3.898, 3.898)
+text = "Continue!"
+label_settings = SubResource("LabelSettings_dpv3d")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Buttons/Continue"]
+stream = ExtResource("5_eqhfm")
+
+[node name="Options" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = -314.099
+offset_top = -630.243
+offset_right = 323.391
+offset_bottom = -492.033
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_gh7l0")
+script = SubResource("GDScript_ehfjd")
+
+[node name="Background" type="NinePatchRect" parent="Buttons/Options"]
+modulate = Color(1.75, 1.75, 1.75, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 3.05176e-05
+offset_top = -3.06932
+offset_right = 64.0
+offset_bottom = 10.9307
+scale = Vector2(10, 10)
+texture = ExtResource("3_x28im")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label3" type="Label" parent="Buttons/Options"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 68.5492
+offset_top = 35.6048
+offset_right = 244.55
+offset_bottom = 58.6048
+scale = Vector2(3.973, 3.973)
+text = "Options!"
+label_settings = SubResource("LabelSettings_dpv3d")
+
+[node name="Label4" type="Label" parent="Buttons/Options"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 74.0741
+offset_top = 31.4611
+offset_right = 250.074
+offset_bottom = 54.4611
+scale = Vector2(3.898, 3.898)
+text = "Options!"
+label_settings = SubResource("LabelSettings_dpv3d")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Buttons/Options"]
+stream = ExtResource("5_eqhfm")
+
+[node name="OptionsMenu" type="Control" parent="Buttons"]
+visible = false
+anchors_preset = 0
+offset_left = -529.978
+offset_top = -894.209
+offset_right = -489.978
+offset_bottom = -854.209
+
+[node name="Controls" type="Control" parent="Buttons/OptionsMenu"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = -30.6936
+offset_top = 214.856
+offset_right = 233.306
+offset_bottom = 363.856
+scale = Vector2(4.255, 4.255)
+mouse_filter = 1
+
+[node name="Background" type="NinePatchRect" parent="Buttons/OptionsMenu/Controls"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 15.0
+offset_top = 40.0
+offset_right = 254.0
+offset_bottom = 90.0
+texture = ExtResource("7_lnntv")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="Buttons/OptionsMenu/Controls"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 47.884
+offset_top = 47.1119
+offset_right = 233.884
+offset_bottom = 57.1119
+mouse_filter = 1
+text = "SPACE/A - INTERACT/JUMP
+"
+label_settings = SubResource("LabelSettings_4ipg2")
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="Buttons/OptionsMenu/Controls"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 17.6354
+offset_top = 62.029
+offset_right = 284.635
+offset_bottom = 72.029
+mouse_filter = 1
+text = "WASD/ARROWS/LEFT STICK - MOVE
+"
+label_settings = SubResource("LabelSettings_4ipg2")
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="Buttons/OptionsMenu/Controls"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 38.3536
+offset_top = 75.703
+offset_right = 305.353
+offset_bottom = 85.703
+mouse_filter = 1
+text = "DOWN/DOWN ARROW - CROUCH"
+label_settings = SubResource("LabelSettings_4ipg2")
+autowrap_mode = 3
+
+[node name="Background" type="NinePatchRect" parent="Buttons/OptionsMenu"]
+modulate = Color(1.75, 1.75, 1.75, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_top = -3.0
+offset_right = 108.0
+offset_bottom = 60.0
+scale = Vector2(10, 10)
+texture = ExtResource("3_x28im")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Close" type="Button" parent="Buttons/OptionsMenu"]
+layout_mode = 0
+offset_left = 992.0
+offset_top = 20.0
+offset_right = 1064.0
+offset_bottom = 92.0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_gh7l0")
+script = SubResource("GDScript_hpc31")
+
+[node name="Background" type="Sprite2D" parent="Buttons/OptionsMenu/Close"]
+modulate = Color(1.75, 1.75, 1.75, 1)
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -3)
+scale = Vector2(4.5, 4.5)
+texture = ExtResource("6_ui2v6")
+centered = false
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Buttons/OptionsMenu/Close"]
+stream = ExtResource("5_eqhfm")
+
+[node name="Music" type="Button" parent="Buttons/OptionsMenu"]
+layout_mode = 0
+offset_left = 323.307
+offset_top = 93.1042
+offset_right = 960.797
+offset_bottom = 231.314
+scale = Vector2(0.675, 0.675)
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_gh7l0")
+script = SubResource("GDScript_twvc2")
+
+[node name="Background" type="NinePatchRect" parent="Buttons/OptionsMenu/Music"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 3.05176e-05
+offset_top = -3.06932
+offset_right = 64.0
+offset_bottom = 10.9307
+scale = Vector2(10, 10)
+texture = ExtResource("7_lnntv")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label4" type="Label" parent="Buttons/OptionsMenu/Music"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -10.6102
+offset_top = 21.2203
+offset_right = 165.389
+offset_bottom = 44.2203
+scale = Vector2(4.653, 4.653)
+text = " Music!"
+label_settings = SubResource("LabelSettings_dpv3d")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Buttons/OptionsMenu/Music"]
+texture_filter = 1
+position = Vector2(568.401, 65.1767)
+scale = Vector2(5.53, 5.53)
+sprite_frames = SubResource("SpriteFrames_6bhd1")
+animation = &"yes"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Buttons/OptionsMenu/Music"]
+stream = ExtResource("5_eqhfm")
+
+[node name="Jump Cancel" type="Button" parent="Buttons/OptionsMenu"]
+layout_mode = 0
+offset_left = 322.571
+offset_top = 223.194
+offset_right = 960.061
+offset_bottom = 361.404
+scale = Vector2(0.675, 0.675)
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_gh7l0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_gh7l0")
+button_mask = 7
+script = SubResource("GDScript_t3icl")
+
+[node name="Background" type="NinePatchRect" parent="Buttons/OptionsMenu/Jump Cancel"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 3.05176e-05
+offset_top = -3.06932
+offset_right = 64.0
+offset_bottom = 10.9307
+scale = Vector2(10, 10)
+texture = ExtResource("7_lnntv")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label4" type="Label" parent="Buttons/OptionsMenu/Jump Cancel"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -10.9739
+offset_top = 43.8957
+offset_right = 197.026
+offset_bottom = 66.8958
+scale = Vector2(2.538, 2.538)
+text = " JUMP CANCEL!"
+label_settings = SubResource("LabelSettings_dpv3d")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Buttons/OptionsMenu/Jump Cancel"]
+texture_filter = 1
+position = Vector2(568.401, 65.1767)
+scale = Vector2(5.53, 5.53)
+sprite_frames = SubResource("SpriteFrames_6bhd1")
+animation = &"yes"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Buttons/OptionsMenu/Jump Cancel"]
+stream = ExtResource("5_eqhfm")
+
+[node name="Bob\'s World Shadow" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = -559.648
+offset_top = -1095.76
+offset_right = -383.648
+offset_bottom = -1072.76
+scale = Vector2(6.555, 6.555)
+text = "BOB'S WORLD"
+label_settings = SubResource("LabelSettings_dpv3d")
+
+[node name="Bob\'s World Text" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -551.463
+offset_top = -1101.9
+offset_right = -375.463
+offset_bottom = -1078.9
+scale = Vector2(6.455, 6.455)
+text = "BOB'S WORLD"
+label_settings = SubResource("LabelSettings_dpv3d")

@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://devcuw3hfes2i"]
+
+[ext_resource type="Texture2D" uid="uid://ijhrp4bxh7iw" path="res://cannon.png" id="2_1wh1m"]
+[ext_resource type="AudioStream" uid="uid://dfj7ouu5udmoo" path="res://cannon fire.wav" id="3_h8rvj"]
+
+[sub_resource type="GDScript" id="GDScript_md661"]
+script/source = "extends StaticBody2D
+
+@onready var test = preload(\"res://cannon_ball.tscn\")
+@onready var sprite = $Sprite2D
+@onready var cannonFire = $CannonFire
+@onready var spawnArea = $SpawnArea
+
+@export var canJumpOn = true
+@export var decibelLevel = -4.0
+@export var cooldown = 3.0
+@export var survivalTime = 5.0
+@export var startingTime = 0.0
+@export var spriteSpinSpeed = -360.0
+@export var speed = 55.0
+@export var animatedMovementAmount = 1.0
+
+var timer = cooldown
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	cannonFire.volume_db = decibelLevel
+	if is_equal_approx(0.0, startingTime): return
+	timer = startingTime
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	timer -= delta
+	if timer <= 0.0:
+		# Set some cannon ball variables, reset the timer, and play the cannon sfx.
+		var test2 = test.instantiate()
+		spawnArea.add_child(test2)
+		test2.speed = speed
+		test2.survivalTime = survivalTime
+		test2.spriteSpinSpeed = spriteSpinSpeed
+		test2.direction = 1.0
+		test2.canJumpOn = canJumpOn
+		timer = cooldown
+		cannonFire.play()
+		
+		# Do two tweens that adjust position and scale, and then do the opposite after the first set of tweens finish.
+		var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT)
+		#var tweenPos = get_tree().create_tween().set_ease(Tween.EASE_OUT)
+		tween.set_trans(Tween.TRANS_ELASTIC)
+		#tweenPos.set_trans(Tween.TRANS_ELASTIC)
+		tween.tween_property(sprite, \"scale:y\", 1.0 + (animatedMovementAmount / 10.0), 0.3)
+		#tweenPos.tween_property(sprite, \"position:y\", sprite.position.y - animatedMovementAmount, 0.3)
+		
+		await tween.finished
+		
+		var tween2 = get_tree().create_tween().set_ease(Tween.EASE_OUT)
+		#var tweenPos2 = get_tree().create_tween().set_ease(Tween.EASE_OUT)
+		#tweenPos2.set_trans(Tween.TRANS_ELASTIC)
+		#tweenPos2.tween_property(sprite, \"position:y\", sprite.position.y + animatedMovementAmount, 0.3)
+		tween2.set_trans(Tween.TRANS_ELASTIC)
+		tween2.tween_property(sprite, \"scale:y\", 1.0, 0.3)
+		
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0hfp"]
+size = Vector2(10, 16)
+
+[node name="Cannon13" type="StaticBody2D"]
+rotation = 1.5708
+script = SubResource("GDScript_md661")
+canJumpOn = false
+cooldown = 5.5
+survivalTime = 1.0
+startingTime = 4.0
+
+[node name="SpawnArea" type="Node2D" parent="."]
+position = Vector2(-7, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_1wh1m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_p0hfp")
+
+[node name="CannonFire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_h8rvj")
+max_distance = 150.0
+attenuation = 0.307786

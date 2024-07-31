@@ -1,0 +1,358 @@
+[gd_scene load_steps=18 format=3 uid="uid://ct5jxbs1wmprp"]
+
+[ext_resource type="Script" path="res://camera_2d.gd" id="1_vnygd"]
+[ext_resource type="Texture2D" uid="uid://b337umj4rhfuj" path="res://new color rect.png" id="1_yaf18"]
+[ext_resource type="Texture2D" uid="uid://dahkvh5jqef6v" path="res://sign.png" id="2_pem0l"]
+[ext_resource type="FontFile" uid="uid://bnxaswqwgr445" path="res://PublicPixel.ttf" id="3_j6lok"]
+[ext_resource type="AudioStream" uid="uid://dyso5tx7ykgae" path="res://bep.wav" id="4_om5lr"]
+[ext_resource type="PackedScene" uid="uid://2qgc53auipq4" path="res://musicPlayer.tscn" id="5_bqyg8"]
+[ext_resource type="PackedScene" uid="uid://tvojw5p36vy0" path="res://menuForPause.tscn" id="6_gqvxl"]
+[ext_resource type="Script" path="res://addons/post_processing/node/post_process.gd" id="7_8c4dy"]
+[ext_resource type="Texture2D" uid="uid://ckeagq4dqq3on" path="res://button but white.png" id="7_q0x5g"]
+[ext_resource type="Script" path="res://ButtonClose.gd" id="8_181nv"]
+[ext_resource type="Script" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="8_ax620"]
+[ext_resource type="Texture2D" uid="uid://b6p65rdhjjtto" path="res://exit.png" id="9_ni4ct"]
+[ext_resource type="AudioStream" uid="uid://b2bluje5w12e4" path="res://click.wav" id="10_8x4hp"]
+
+[sub_resource type="GDScript" id="GDScript_eacqw"]
+script/source = "extends Control
+
+@onready var text = $TextEdit
+@onready var icon = $Icon
+@onready var camera = $\"../..\"
+@onready var background = $Background
+@onready var audio = $AudioStreamPlayer
+var chatting = false
+var offsetBack
+var tween
+var offsetIcon
+var time
+var defaultTime
+var offsetText
+var timesAmount = 2
+
+func change(texture, string, timePerLetter):
+	chatting = true
+	var number = 0
+	for i in string:
+		number += 1
+	time = timePerLetter * timesAmount
+	defaultTime = timePerLetter * timesAmount
+	timePerLetter = timePerLetter * number
+	texture = load(texture)
+	text.text = \"\"
+	var tween2 = get_tree().create_tween()
+	tween = tween2
+	tween2.tween_property(text, \"text\", string, timePerLetter)
+	icon.set_texture(texture)
+	await tween2.finished
+	chatting = false
+
+func _process(delta):
+	if chatting == true:
+		time -= delta
+		if time <= 0: 
+			time = defaultTime
+			audio.play()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uk2ya"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0.901185, 0.808171, 3.85046e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7f8j"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Resource" id="Resource_0ogpd"]
+script = ExtResource("8_ax620")
+reload = false
+ASCII = false
+ASCIISize = Vector2(4, 9)
+ChromaticAberration = true
+StrenghtCA = 1.0
+Blur = true
+L_O_D = 0.0
+FishEye = false
+FishEyeAspect = 1.0
+FishEyeDistortion = 1.0
+FishEyeRadius = 1.0
+FishEyeAlpha = 1.0
+FishEyeCrop = 1.0
+FishEyeCropColor = Color(0, 0, 0, 1)
+Vignette = true
+VignetteIntensity = 0.4
+VignetteOpacity = 0.5
+VignetteR_G_B = Color(0, 0, 0, 1)
+Glitch = false
+GlitchRange = 0.01
+GlitchNoiseQuality = 250.0
+GlitchIntenity = 0.002
+GlitchOffset = 0.03
+GlitchColorOffset = 0.0
+Outline = false
+OutlineColor = Color(0, 0, 0, 1)
+OutlineThreshold = 0.0
+OutlineBlend = 0.01
+Grain = false
+GrainPower = 75
+CircularWaves = true
+CircularWavesAmplitude = 0.0
+CircularWavesFrequency = 12.69
+CircularWavesRippleRate = 9.2
+SpeedLines = true
+SpeedLinesColor = Color(1, 1, 1, 1)
+SpeedLinesCount = 2
+SpeedLineDensity = 0.0
+SpeedLineSpeed = 20
+ColorCorrection = true
+ColorCorrectionTint = Color(1, 1, 1, 1)
+ColorCorrectionBrightness = 0.0
+ColorCorrectionSaturation = 0.05
+Pixelate = false
+PixelatePixelSize = 0
+CRT = true
+overlay = true
+scanlines_opacity = 0.205
+scanlines_width = 0.0
+grille_opacity = 0.205
+pixelate = false
+roll_speed = 8.0
+roll_size = 100.0
+roll_variation = 1.8
+distort_intensity = 0.0
+noise_opacity = 0.075
+noise_speed = 5.0
+static_noise_intensity = 0.01
+aberration = 0.0
+brightness = 1.4
+discolor = false
+warp_amount = 0.275
+clip_warp = false
+vignette_intensity = 0.4
+vignette_opacity = 0.24
+AnalogMonitor = false
+AnalogMonitorResolution = Vector2(256, 256)
+ScreenShake = true
+ScreenShakePower = 0.0
+
+[node name="Camera2D" type="Camera2D"]
+ignore_rotation = false
+zoom = Vector2(8, 8)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+rotation_smoothing_enabled = true
+script = ExtResource("1_vnygd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 103
+offset = Vector2(960, 622.55)
+scale = Vector2(7.24, 7.24)
+transform = Transform2D(7.24, 0, 0, 7.24, 960, 622.55)
+
+[node name="Dialogue" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -1039.61
+offset_right = 960.0
+offset_bottom = 40.3937
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.1, 0.1)
+mouse_force_pass_scroll_events = false
+script = SubResource("GDScript_eacqw")
+
+[node name="Background" type="NinePatchRect" parent="CanvasLayer/Dialogue"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -592.541
+offset_top = -99.6547
+offset_right = -469.441
+offset_bottom = -72.3547
+scale = Vector2(10, 10)
+texture = ExtResource("1_yaf18")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Dialogue"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -572.0
+offset_top = -71.0
+offset_right = -372.0
+offset_bottom = 129.0
+texture = ExtResource("2_pem0l")
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Dialogue"]
+layout_mode = 0
+offset_left = -296.0
+offset_top = -69.0
+offset_right = 566.0
+offset_bottom = 139.0
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 0)
+theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/selection_color = Color(0, 0, 0, 0)
+theme_override_colors/current_line_color = Color(0, 0, 0, 0)
+theme_override_colors/caret_color = Color(0, 0, 0, 0)
+theme_override_colors/caret_background_color = Color(0, 0, 0, 0)
+theme_override_colors/word_highlighted_color = Color(0, 0, 0, 0)
+theme_override_colors/search_result_color = Color(0, 0, 0, 0)
+theme_override_colors/search_result_border_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("3_j6lok")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/read_only = SubResource("StyleBoxFlat_uk2ya")
+text = "test cmon
+,am
+kafa
+kfsaf
+esfesfse"
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+autowrap_mode = 1
+scroll_v_scroll_speed = 10.0
+caret_type = 1
+caret_blink = true
+text_direction = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/Dialogue"]
+stream = ExtResource("4_om5lr")
+pitch_scale = 0.8
+
+[node name="Menu" parent="CanvasLayer" instance=ExtResource("6_gqvxl")]
+visible = false
+
+[node name="Notification" type="Control" parent="CanvasLayer"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = -2.76243
+offset_top = 53.3771
+offset_right = 37.2376
+offset_bottom = 93.3771
+scale = Vector2(0.135, 0.135)
+
+[node name="Background" type="NinePatchRect" parent="CanvasLayer/Notification"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 405.0
+offset_top = -252.0
+offset_right = 458.0
+offset_bottom = -227.0
+scale = Vector2(10, 10)
+texture = ExtResource("7_q0x5g")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Notification"]
+layout_mode = 0
+offset_left = 417.0
+offset_top = -232.0
+offset_right = 1192.0
+offset_bottom = 56.0
+scale = Vector2(0.65, 0.65)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/background_color = Color(1, 1, 1, 0)
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 0)
+theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/selection_color = Color(0, 0, 0, 0)
+theme_override_colors/current_line_color = Color(0, 0, 0, 0)
+theme_override_colors/caret_color = Color(0, 0, 0, 0)
+theme_override_colors/caret_background_color = Color(0, 0, 0, 0)
+theme_override_colors/word_highlighted_color = Color(0, 0, 0, 0)
+theme_override_colors/search_result_color = Color(0, 0, 0, 0)
+theme_override_colors/search_result_border_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("3_j6lok")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/read_only = SubResource("StyleBoxFlat_uk2ya")
+text = "If you want a
+look at the
+controls, press ESCAPE and go tooptions."
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+autowrap_mode = 1
+scroll_v_scroll_speed = 10.0
+caret_type = 1
+caret_blink = true
+text_direction = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/Notification"]
+layout_mode = 0
+offset_left = 855.331
+offset_top = -241.457
+offset_right = 921.331
+offset_bottom = -175.457
+theme_override_styles/normal = SubResource("StyleBoxFlat_q7f8j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_q7f8j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_q7f8j")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_q7f8j")
+theme_override_styles/focus = SubResource("StyleBoxFlat_q7f8j")
+script = ExtResource("8_181nv")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Notification/Button"]
+texture_filter = 1
+position = Vector2(32.9537, 33.391)
+scale = Vector2(4.14, 4.14)
+texture = ExtResource("9_ni4ct")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/Notification/Button"]
+stream = ExtResource("10_8x4hp")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 121
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+visible = false
+offset_left = -10.0
+offset_top = -20.0
+offset_right = 1924.0
+offset_bottom = 1096.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+
+[node name="Music" parent="." instance=ExtResource("5_bqyg8")]
+
+[node name="PostProcess" type="CanvasLayer" parent="."]
+offset = Vector2(63, 0)
+scale = Vector2(2.935, 2.935)
+transform = Transform2D(2.935, 0, 0, 2.935, 63, 0)
+follow_viewport_enabled = true
+follow_viewport_scale = 3.615
+script = ExtResource("7_8c4dy")
+configuration = SubResource("Resource_0ogpd")

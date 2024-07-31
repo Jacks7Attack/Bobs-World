@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=3 uid="uid://d35ly0tjn6xa0"]
+
+[ext_resource type="Texture2D" uid="uid://vj0p6vsvucy" path="res://logo_large_color_dark.png" id="1_t3pb8"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="2_k3i2o"]
+[ext_resource type="Script" path="res://addons/post_processing/node/post_process.gd" id="3_uod1n"]
+[ext_resource type="Script" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="4_ge0ls"]
+
+[sub_resource type="Resource" id="Resource_p8xj3"]
+script = ExtResource("4_ge0ls")
+reload = false
+ASCII = false
+ASCIISize = Vector2(4, 9)
+ChromaticAberration = true
+StrenghtCA = 1.0
+Blur = false
+L_O_D = 0.0
+FishEye = false
+FishEyeAspect = 1.0
+FishEyeDistortion = 1.0
+FishEyeRadius = 1.0
+FishEyeAlpha = 1.0
+FishEyeCrop = 1.0
+FishEyeCropColor = Color(0, 0, 0, 1)
+Vignette = true
+VignetteIntensity = 0.4
+VignetteOpacity = 0.5
+VignetteR_G_B = Color(0, 0, 0, 1)
+Glitch = false
+GlitchRange = 0.01
+GlitchNoiseQuality = 250.0
+GlitchIntenity = 0.002
+GlitchOffset = 0.03
+GlitchColorOffset = 0.0
+Outline = false
+OutlineColor = Color(0, 0, 0, 1)
+OutlineThreshold = 0.0
+OutlineBlend = 0.01
+Grain = false
+GrainPower = 75
+CircularWaves = false
+CircularWavesAmplitude = 2.0
+CircularWavesFrequency = 12.69
+CircularWavesRippleRate = 9.2
+SpeedLines = true
+SpeedLinesColor = Color(1, 1, 1, 1)
+SpeedLinesCount = 2
+SpeedLineDensity = 0.0
+SpeedLineSpeed = 20
+ColorCorrection = true
+ColorCorrectionTint = Color(1, 1, 1, 1)
+ColorCorrectionBrightness = 0.0
+ColorCorrectionSaturation = 0.05
+Pixelate = false
+PixelatePixelSize = 8
+CRT = true
+overlay = true
+scanlines_opacity = 0.205
+scanlines_width = 0.0
+grille_opacity = 0.205
+pixelate = false
+roll_speed = 8.0
+roll_size = 100.0
+roll_variation = 1.8
+distort_intensity = 0.0
+noise_opacity = 0.075
+noise_speed = 5.0
+static_noise_intensity = 0.01
+aberration = 0.0
+brightness = 1.4
+discolor = false
+warp_amount = 0.275
+clip_warp = false
+vignette_intensity = 0.4
+vignette_opacity = 0.24
+AnalogMonitor = false
+AnalogMonitorResolution = Vector2(256, 256)
+ScreenShake = false
+ScreenShakePower = 1.0
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1511.0
+offset_top = -1105.0
+offset_right = 1710.0
+offset_bottom = 1098.0
+color = Color(0, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PostProcess" type="CanvasLayer" parent="Camera2D"]
+offset = Vector2(63, 0)
+scale = Vector2(2.935, 2.935)
+transform = Transform2D(2.935, 0, 0, 2.935, 63, 0)
+follow_viewport_enabled = true
+follow_viewport_scale = 3.615
+script = ExtResource("3_uod1n")
+configuration = SubResource("Resource_p8xj3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.615, 0.615)
+texture = ExtResource("1_t3pb8")
+script = ExtResource("2_k3i2o")

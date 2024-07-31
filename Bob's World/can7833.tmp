@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8tlvaxymgu2v"]
+
+[ext_resource type="Script" path="res://cannon_ball.gd" id="1_88ekw"]
+[ext_resource type="Texture2D" uid="uid://b8xv5rg38ut1d" path="res://cannon ball.png" id="1_l4soc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oikoe"]
+size = Vector2(2, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qoru8"]
+size = Vector2(14, 2)
+
+[node name="Cannon Ball" type="Node2D"]
+script = ExtResource("1_88ekw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_l4soc")
+
+[node name="death area" type="Area2D" parent="."]
+position = Vector2(-8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="death area"]
+shape = SubResource("RectangleShape2D_oikoe")
+
+[node name="stop area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stop area"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_qoru8")
+
+[connection signal="body_entered" from="death area" to="." method="_on_death_area_body_entered"]
+[connection signal="body_entered" from="stop area" to="." method="_on_stop_area_body_entered"]

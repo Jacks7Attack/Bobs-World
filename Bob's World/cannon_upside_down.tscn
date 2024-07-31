@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0xty6f1mi2pl"]
+
+[ext_resource type="Texture2D" uid="uid://ijhrp4bxh7iw" path="res://cannon.png" id="1_yfrbx"]
+
+[sub_resource type="GDScript" id="GDScript_6l1en"]
+script/source = "extends StaticBody2D
+
+@export var cooldown = 3.0
+@export var survivalTime = 5.0
+@export var startingTime = 0.0
+@export var spriteSpinSpeed = -360.0
+@export var speed = 55.0
+@onready var test = preload(\"res://cannon_ball.tscn\")
+@onready var sprite = $Sprite2D
+@export var amount = 1.0
+@onready var spawnArea = $SpawnArea
+var timer = cooldown
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	if is_equal_approx(0.0, startingTime): return
+	timer = startingTime
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	timer -= delta
+	if timer <= 0.0:
+		var test2 = test.instantiate()
+		spawnArea.add_child(test2)
+		test2.speed = speed
+		test2.survivalTime = survivalTime
+		test2.spriteSpinSpeed = spriteSpinSpeed
+		test2.direction = -1.0
+		timer = cooldown
+		var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT)
+		var tweenPos = get_tree().create_tween().set_ease(Tween.EASE_OUT)
+		tween.set_trans(Tween.TRANS_ELASTIC)
+		tweenPos.set_trans(Tween.TRANS_ELASTIC)
+		tween.tween_property(sprite, \"scale:y\", 1.1, 0.3)
+		tweenPos.tween_property(sprite, \"position:y\", sprite.position.y - amount, 0.3)
+		await tween.finished
+		var tween2 = get_tree().create_tween().set_ease(Tween.EASE_OUT)
+		var tweenPos2 = get_tree().create_tween().set_ease(Tween.EASE_OUT)
+		tweenPos2.set_trans(Tween.TRANS_ELASTIC)
+		tweenPos2.tween_property(sprite, \"position:y\", sprite.position.y + amount, 0.3)
+		tween2.set_trans(Tween.TRANS_ELASTIC)
+		tween2.tween_property(sprite, \"scale:y\", 1.0, 0.3)
+		
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iqml0"]
+size = Vector2(13, 16)
+
+[node name="CannonUpsideDown" type="StaticBody2D"]
+rotation = 3.14159
+script = SubResource("GDScript_6l1en")
+
+[node name="SpawnArea" type="Node2D" parent="."]
+position = Vector2(7, -6.11959e-07)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_yfrbx")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_iqml0")

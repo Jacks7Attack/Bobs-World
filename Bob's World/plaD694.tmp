@@ -1,0 +1,208 @@
+[gd_scene load_steps=13 format=3 uid="uid://bsedpmaxc0joj"]
+
+[ext_resource type="PackedScene" uid="uid://dpqfykml07o3n" path="res://Player InGame.tscn" id="1_25flf"]
+[ext_resource type="Texture2D" uid="uid://dlrtpvttqsqw" path="res://grass platformer.png" id="1_coi3d"]
+[ext_resource type="Texture2D" uid="uid://ctd6ocwyvdctw" path="res://wind.png" id="1_mlf3p"]
+[ext_resource type="Texture2D" uid="uid://dahkvh5jqef6v" path="res://sign.png" id="1_omi12"]
+[ext_resource type="Script" path="res://Area2D Die.gd" id="5_b2aty"]
+
+[sub_resource type="Gradient" id="Gradient_n6dwj"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uyile"]
+texture = ExtResource("1_coi3d")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_qik1r"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_uyile")
+
+[sub_resource type="GDScript" id="GDScript_nd7xn"]
+script/source = "extends Area2D
+
+# 18 chars per line for dialogue.
+var player
+var inArea = false
+var started = false
+var canContinue = false
+var canContinue2 = false
+var canContinue3 = false
+var canContinue4 = false
+var canContinue5 = false
+var canContinue6 = false
+var canContinue7 = false
+var cooldown = false
+
+
+func _on_body_entered(body):
+	if body.is_in_group(\"Player\") and started == false:
+		player = body
+		inArea = true
+
+func _on_body_exited(body):
+	if body.is_in_group(\"Player\") and started == false:
+		inArea = false
+
+func _input(_event):
+	var pressed = false
+	
+	if inArea == true and Input.is_action_just_pressed(\"jump\") and started == false and pressed == false and canContinue2 == false and cooldown == false:
+		started = true
+		pressed = true
+		var chat = player.chat
+		chat.change(\"res://sign.png\", \"heyo bob\", 0.05)
+		chat.visible = true
+		await chat.tween.finished
+		canContinue = true
+	
+	if inArea == true and Input.is_action_just_pressed(\"jump\") and started == true and pressed == false and canContinue == true and cooldown == false:
+		canContinue = false
+		pressed = true
+		var chat = player.chat
+		chat.change(\"res://sign.png\", \"so uh\", 0.05)
+		chat.visible = true
+		await chat.tween.finished
+		canContinue2 = true
+	
+	if inArea == true and Input.is_action_just_pressed(\"jump\") and started == true and pressed == false and canContinue2 == true and cooldown == false:
+		canContinue2 = false
+		pressed = true
+		var chat = player.chat
+		chat.change(\"res://sign.png\", \"move up or intera--ct to jump\", 0.05)
+		chat.visible = true
+		await chat.tween.finished
+		canContinue3 = true
+	
+	if inArea == true and Input.is_action_just_pressed(\"jump\") and started == true and pressed == false and canContinue3 == true and cooldown == false:
+		canContinue3 = false
+		pressed = true
+		var chat = player.chat
+		chat.change(\"res://bob image.png\", \"who\", 0.05)
+		chat.visible = true
+		await chat.tween.finished
+		canContinue4 = true
+	
+	if inArea == true and Input.is_action_just_pressed(\"jump\") and started == true and pressed == false and canContinue4 == true and cooldown == false:
+		canContinue4 = false
+		pressed = true
+		var chat = player.chat
+		chat.change(\"res://sign.png\", \"?\", 0.05)
+		chat.visible = true
+		await chat.tween.finished
+		canContinue5 = true
+	
+	if inArea == true and Input.is_action_just_pressed(\"jump\") and started == true and pressed == false and canContinue5 == true and cooldown == false:
+		canContinue5 = false
+		pressed = true
+		var chat = player.chat
+		chat.change(\"res://bob image.png\", \"asked\", 0.05)
+		chat.visible = true
+		await chat.tween.finished
+		canContinue6 = true
+	
+	if inArea == true and Input.is_action_just_pressed(\"jump\") and started == true and pressed == false and canContinue6 == true and cooldown == false:
+		canContinue6 = false
+		pressed = true
+		var chat = player.chat
+		chat.change(\"res://sign.png\", \":(\", 0.05)
+		chat.visible = true
+		await chat.tween.finished
+		canContinue7 = true
+	
+	if inArea == true and Input.is_action_just_pressed(\"jump\") and started == true and pressed == false and canContinue7 == true and cooldown == false:
+		canContinue7 = false
+		pressed = true
+		started = false
+		var chat = player.chat
+		chat.visible = false
+		cooldown = true
+		await get_tree().create_timer(1.0).timeout
+		cooldown = false
+		
+	
+	
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aekav"]
+size = Vector2(20, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d617j"]
+size = Vector2(16, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crtrb"]
+size = Vector2(10000, 4836)
+
+[node name="PlatformerTest" type="Node2D"]
+position = Vector2(-145, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-36, 413)
+scale = Vector2(1.54807, 3.42982)
+color = Color(0.0652197, 0.612584, 1, 1)
+polygon = PackedVector2Array(-1486, -727, 2150, -753, 2169, 364, -1482, 368)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+texture_filter = 1
+amount = 2000
+lifetime = 24.8
+preprocess = 50.0
+texture = ExtResource("1_mlf3p")
+emission_shape = 3
+emission_rect_extents = Vector2(5000, 2000)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+angular_velocity_min = -0.3
+angular_velocity_max = 0.3
+scale_amount_min = 2.5
+scale_amount_max = 5.0
+color_ramp = SubResource("Gradient_n6dwj")
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = SubResource("TileSet_qik1r")
+format = 2
+layer_0/tile_data = PackedInt32Array(65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 131064, 65536, 0, 196600, 65536, 0, 196601, 65536, 0, 196602, 65536, 0, 196603, 65536, 0, 196604, 65536, 0, 196605, 65536, 0, 196606, 65536, 0, 196607, 65536, 0, 131072, 65536, 0, 131073, 65536, 0, 131074, 65536, 0, 131075, 65536, 0, 131076, 65536, 0, 131077, 65536, 0, 65541, 65536, 0, 65540, 65536, 0, 65539, 65536, 0, 65538, 65536, 0, 65537, 65536, 0, 65536, 65536, 0, 131071, 65536, 0, 131070, 65536, 0, 131069, 65536, 0, 131068, 65536, 0, 131067, 65536, 0, 131066, 65536, 0, 131065, 65536, 0)
+
+[node name="Sign" type="StaticBody2D" parent="."]
+position = Vector2(45, -8)
+
+[node name="Area2D" type="Area2D" parent="Sign"]
+script = SubResource("GDScript_nd7xn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sign/Area2D"]
+shape = SubResource("RectangleShape2D_aekav")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sign"]
+texture_filter = 1
+texture = ExtResource("1_omi12")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sign"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_d617j")
+disabled = true
+
+[node name="PlayerInGame" parent="." instance=ExtResource("1_25flf")]
+position = Vector2(-16, -8)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("5_b2aty")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2582)
+shape = SubResource("RectangleShape2D_crtrb")
+
+[connection signal="body_entered" from="Sign/Area2D" to="Sign/Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Sign/Area2D" to="Sign/Area2D" method="_on_body_exited"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

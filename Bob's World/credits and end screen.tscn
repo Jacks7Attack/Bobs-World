@@ -1,0 +1,260 @@
+[gd_scene load_steps=9 format=3 uid="uid://dboeaabmw3mcd"]
+
+[ext_resource type="Texture2D" uid="uid://cd1ugn0njbg5g" path="res://Thanks For Playing.png" id="1_e3ktb"]
+[ext_resource type="Script" path="res://Scroll Text.gd" id="2_jbpu2"]
+[ext_resource type="FontFile" uid="uid://bnxaswqwgr445" path="res://PublicPixel.ttf" id="3_u7ljs"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="4_0e4w2"]
+[ext_resource type="Script" path="res://addons/post_processing/node/post_process.gd" id="5_ggpfb"]
+[ext_resource type="Script" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="6_xxp62"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d1xv0"]
+font = ExtResource("3_u7ljs")
+
+[sub_resource type="Resource" id="Resource_xm4hs"]
+script = ExtResource("6_xxp62")
+reload = false
+ASCII = false
+ASCIISize = Vector2(4, 9)
+ChromaticAberration = true
+StrenghtCA = 1.0
+Blur = true
+L_O_D = 0.0
+FishEye = false
+FishEyeAspect = 1.0
+FishEyeDistortion = 1.0
+FishEyeRadius = 1.0
+FishEyeAlpha = 1.0
+FishEyeCrop = 1.0
+FishEyeCropColor = Color(0, 0, 0, 1)
+Vignette = true
+VignetteIntensity = 0.4
+VignetteOpacity = 0.5
+VignetteR_G_B = Color(0, 0, 0, 1)
+Glitch = false
+GlitchRange = 0.01
+GlitchNoiseQuality = 250.0
+GlitchIntenity = 0.002
+GlitchOffset = 0.03
+GlitchColorOffset = 0.0
+Outline = false
+OutlineColor = Color(0, 0, 0, 1)
+OutlineThreshold = 0.0
+OutlineBlend = 0.01
+Grain = false
+GrainPower = 75
+CircularWaves = true
+CircularWavesAmplitude = 0.0
+CircularWavesFrequency = 12.69
+CircularWavesRippleRate = 9.2
+SpeedLines = true
+SpeedLinesColor = Color(1, 1, 1, 1)
+SpeedLinesCount = 2
+SpeedLineDensity = 0.0
+SpeedLineSpeed = 20
+ColorCorrection = true
+ColorCorrectionTint = Color(1, 1, 1, 1)
+ColorCorrectionBrightness = 0.0
+ColorCorrectionSaturation = 0.05
+Pixelate = false
+PixelatePixelSize = 0
+CRT = true
+overlay = true
+scanlines_opacity = 0.205
+scanlines_width = 0.0
+grille_opacity = 0.205
+pixelate = false
+roll_speed = 8.0
+roll_size = 100.0
+roll_variation = 1.8
+distort_intensity = 0.0
+noise_opacity = 0.075
+noise_speed = 5.0
+static_noise_intensity = 0.01
+aberration = 0.0
+brightness = 1.4
+discolor = false
+warp_amount = 0.275
+clip_warp = false
+vignette_intensity = 0.4
+vignette_opacity = 0.24
+AnalogMonitor = false
+AnalogMonitorResolution = Vector2(256, 256)
+ScreenShake = true
+ScreenShakePower = 0.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_e3ktb")
+
+[node name="Scroll Text" type="Control" parent="."]
+top_level = true
+texture_repeat = 1
+layout_mode = 3
+anchors_preset = 0
+offset_top = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_jbpu2")
+globalTargetPos = Vector2(0, -48)
+time = 27.5
+
+[node name="Label" type="Label" parent="Scroll Text"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -20.0
+offset_top = 8.0
+offset_right = 156.0
+offset_bottom = 31.0
+scale = Vector2(0.23, 0.23)
+text = "Bob's World"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Label2" type="Label" parent="Scroll Text/Label"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.888
+offset_top = 1.343
+offset_right = 174.112
+offset_bottom = 24.343
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Bob's World"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Label2" type="Label" parent="Scroll Text"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -24.0
+offset_top = 16.0
+offset_right = 360.0
+offset_bottom = 39.0
+scale = Vector2(0.125, 0.125)
+text = "Squirgel - The Main Dude"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Label2" type="Label" parent="Scroll Text/Label2"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.888
+offset_top = 1.343
+offset_right = 174.112
+offset_bottom = 24.343
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Squirgel - The Main Dude"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Label3" type="Label" parent="Scroll Text"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -24.0
+offset_top = 20.0
+offset_right = 488.0
+offset_bottom = 43.0
+scale = Vector2(0.095, 0.095)
+text = "ItsKorin - Post Processing Addon"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Label2" type="Label" parent="Scroll Text/Label3"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.888
+offset_top = 1.343
+offset_right = 174.112
+offset_bottom = 24.343
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "ItsKorin - Post Processing Addon"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Label4" type="Label" parent="Scroll Text"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -27.0
+offset_top = 24.0
+offset_right = 581.0
+offset_bottom = 47.0
+scale = Vector2(0.09, 0.09)
+text = "vaporvee - Discord Rich Presence Addon"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Label2" type="Label" parent="Scroll Text/Label4"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.888
+offset_top = 1.343
+offset_right = 174.112
+offset_bottom = 24.343
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "vaporvee - Discord Rich Presence Addon"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Label5" type="Label" parent="Scroll Text"]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -19.0
+offset_top = 28.0
+offset_right = 589.0
+offset_bottom = 51.0
+scale = Vector2(0.12, 0.12)
+text = "You - For Playing :)"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Label2" type="Label" parent="Scroll Text/Label5"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.888
+offset_top = 1.343
+offset_right = 174.112
+offset_bottom = 24.343
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "You - For Playing :)"
+label_settings = SubResource("LabelSettings_d1xv0")
+uppercase = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(33.875, 33.875)
+script = ExtResource("4_0e4w2")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+visible = false
+top_level = true
+offset_left = -46.6171
+offset_top = -23.3085
+offset_right = -6.61708
+offset_bottom = 16.6915
+scale = Vector2(2.57322, 1.34383)
+color = Color(0, 0, 0, 1)
+
+[node name="PostProcess" type="CanvasLayer" parent="Camera2D"]
+offset = Vector2(63, 0)
+scale = Vector2(2.935, 2.935)
+transform = Transform2D(2.935, 0, 0, 2.935, 63, 0)
+follow_viewport_enabled = true
+follow_viewport_scale = 3.615
+script = ExtResource("5_ggpfb")
+configuration = SubResource("Resource_xm4hs")

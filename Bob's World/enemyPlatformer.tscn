@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://bp1v1b3vnko7u"]
+[gd_scene load_steps=20 format=3 uid="uid://bp1v1b3vnko7u"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_cp024"]
 [ext_resource type="Texture2D" uid="uid://c78x5vkdg2hbr" path="res://bobalt.png" id="2_l2v0w"]
 [ext_resource type="AudioStream" uid="uid://dtg12576kuqgd" path="res://footstep pixelated.wav" id="3_qipge"]
 [ext_resource type="Texture2D" uid="uid://ctd6ocwyvdctw" path="res://wind.png" id="4_iapmw"]
 [ext_resource type="AudioStream" uid="uid://c12m7bpu108a7" path="res://cannon ball hit.wav" id="5_04hkq"]
+[ext_resource type="Texture2D" uid="uid://dialswrnypvdl" path="res://test.png" id="6_wuryu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jgknp"]
 atlas = ExtResource("2_l2v0w")
@@ -84,6 +85,10 @@ size = Vector2(9, 1)
 [sub_resource type="Gradient" id="Gradient_sxhf5"]
 colors = PackedColorArray(1, 1, 1, 1, 0.241156, 0.241156, 0.241156, 0)
 
+[sub_resource type="Gradient" id="Gradient_kh8t8"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_cp024")
 
@@ -143,5 +148,28 @@ stream = ExtResource("5_04hkq")
 volume_db = 9.515
 max_distance = 150.0
 attenuation = 0.307786
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -2)
+emitting = false
+amount = 1
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
+texture = ExtResource("6_wuryu")
+emission_shape = 1
+emission_sphere_radius = 2.95
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 3.6
+initial_velocity_max = 3.6
+angular_velocity_min = -80.0
+angular_velocity_max = 80.0
+angle_min = -20.0
+angle_max = 20.0
+scale_amount_min = 0.5
+scale_amount_max = 0.65
+color_ramp = SubResource("Gradient_kh8t8")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

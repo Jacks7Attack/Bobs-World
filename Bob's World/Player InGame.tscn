@@ -29,6 +29,8 @@ script/source = "extends CharacterBody2D
 @onready var speed = defaultSpeed
 @onready var dashParticle = $AnimatedSprite2D/CPUParticles2D
 @onready var dashIndicator = $AnimatedSprite2D/Icon
+@onready var initialPos = position
+@onready var rect = $\"..\"/Camera2D/CanvasLayer2/ColorRect
 
 @export var maxDashTime = 0.25
 @export var maxDashCooldown = 2.0
@@ -236,6 +238,18 @@ func _input(_event):
 		else:
 			jumped = true
 			jumpTime = defaultJumpTime
+
+func transparent():
+	rect.visible = true
+	var tween = get_tree().create_tween()
+	var color2 = Color(0, 0, 0, 0)
+	tween.tween_property(rect, \"modulate\", color2, 2.0)
+
+func doVisible():
+	rect.visible = true
+	var tween = get_tree().create_tween()
+	var color2 = Color(0, 0, 0, 1)
+	tween.tween_property(rect, \"modulate\", color2, 2.0)
 	
 # Runs every frame.
 func _process(delta):
@@ -400,6 +414,8 @@ func _process(delta):
 		velocity.x = direction * speed
 	elif !dashing:
 		velocity.x = move_toward(velocity.x, 0, speed)
+	
+	if chat.visible: velocity.x = 0.0
 	
 	# Makes the player jump if the player is on the floor when jump time is greater than 0, basically jump buffering.
 	if is_on_floor() and jumpTime > 0 and chat.visible == false and transition == false:

@@ -1,9 +1,11 @@
 extends Area2D
 
 @export var intendedUpDirection = Vector2.UP
+@onready var particle = $CPUParticles2D
 
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
+		particle.emitting = true
 		body.saveCheckpoint(position)
 		body.up_direction = intendedUpDirection
 		if intendedUpDirection.is_equal_approx(Vector2.UP): 

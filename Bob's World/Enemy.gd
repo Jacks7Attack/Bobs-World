@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var particles = $"Feet Point/CPUParticles2D"
 @onready var footstep = $footstep
 @onready var hitSound = $HitSound
+@onready var hitParticles = $CPUParticles2D
 
 @export var flipSpriteOnStart = false
 @export var speed = 60.0
@@ -69,6 +70,7 @@ func _process(delta):
 	
 	# If the enemy is dead and it hasn't been known yet, kill the enemy 
 	if dead == true and deadKnown == false:
+		hitParticles.emitting = true
 		particles.emitting = false
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_OUT)

@@ -40,6 +40,10 @@ mouse_cursor/custom_image_hotspot=Vector2(8, 8)
 
 enabled=PackedStringArray("res://addons/discord-rpc-gd/plugin.cfg", "res://addons/post_processing/plugin.cfg")
 
+[gui]
+
+common/snap_controls_to_pixels=false
+
 [input]
 
 up={
@@ -155,4 +159,4 @@ dash={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.31321, 0.522067, 1, 1)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

@@ -1,0 +1,3 @@
+Due to Godot's license possibly changing and due to simplicity, their main license is at https://godotengine.org/license/
+
+Godot also uses a good chunk of other products/services/files, all with different licenses, it is at https://github.com/godotengine/godot/blob/master/COPYRIGHT.txt

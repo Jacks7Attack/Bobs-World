@@ -22,4 +22,3 @@ func fadeOut():
 	
 	tween.tween_property(rect, "modulate", visibleColor, 2.0)
 	
-

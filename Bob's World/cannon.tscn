@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfs40wxrmfrqx"]
 
-[ext_resource type="Script" path="res://cannon.gd" id="1_bny4f"]
+[ext_resource type="Script" uid="uid://bdfadw41fwcm2" path="res://cannon.gd" id="1_bny4f"]
 [ext_resource type="Texture2D" uid="uid://ijhrp4bxh7iw" path="res://cannon.png" id="2_2wkd1"]
 [ext_resource type="AudioStream" uid="uid://dfj7ouu5udmoo" path="res://cannon fire.wav" id="3_5xd23"]
 

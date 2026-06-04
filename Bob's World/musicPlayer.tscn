@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://2qgc53auipq4"]
 
-[ext_resource type="Script" path="res://Audio.gd" id="1_3gny3"]
+[ext_resource type="Script" uid="uid://dugnmvgh3g81n" path="res://Audio.gd" id="1_3gny3"]
 [ext_resource type="AudioStream" uid="uid://qaojmicsjiyl" path="res://music/FUNK MODE.wav" id="2_dc0sx"]
 [ext_resource type="AudioStream" uid="uid://dm5ks7tvwk10t" path="res://music/CAKE POP.wav" id="3_slabk"]
 [ext_resource type="AudioStream" uid="uid://bfn36syw1fity" path="res://music/CONTEXT_REQUIRED.wav" id="4_4vblp"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://eelbaccr22k8"]
 
-[ext_resource type="Script" path="res://fight.gd" id="1_yobge"]
+[ext_resource type="Script" uid="uid://cujs4cwjsvmam" path="res://fight.gd" id="1_yobge"]
 [ext_resource type="Texture2D" uid="uid://ci5qo578qmywt" path="res://grass base.png" id="2_cah7b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_210ir"]

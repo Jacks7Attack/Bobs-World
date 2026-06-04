@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://dboeaabmw3mcd"]
 
 [ext_resource type="Texture2D" uid="uid://cd1ugn0njbg5g" path="res://Thanks For Playing.png" id="1_e3ktb"]
-[ext_resource type="Script" path="res://Scroll Text.gd" id="2_jbpu2"]
+[ext_resource type="Script" uid="uid://gg8e7bc4g83p" path="res://Scroll Text.gd" id="2_jbpu2"]
 [ext_resource type="FontFile" uid="uid://bnxaswqwgr445" path="res://PublicPixel.ttf" id="3_u7ljs"]
-[ext_resource type="Script" path="res://Camera2D.gd" id="4_0e4w2"]
-[ext_resource type="Script" path="res://addons/post_processing/node/post_process.gd" id="5_ggpfb"]
-[ext_resource type="Script" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="6_xxp62"]
+[ext_resource type="Script" uid="uid://bt50inunjj6dy" path="res://Camera2D.gd" id="4_0e4w2"]
+[ext_resource type="Script" uid="uid://bveyad6533wao" path="res://addons/post_processing/node/post_process.gd" id="5_ggpfb"]
+[ext_resource type="Script" uid="uid://wrgdgc4ylxd" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="6_xxp62"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d1xv0"]
 font = ExtResource("3_u7ljs")

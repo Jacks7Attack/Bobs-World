@@ -1,16 +1,16 @@
 [gd_scene load_steps=18 format=3 uid="uid://ct5jxbs1wmprp"]
 
-[ext_resource type="Script" path="res://camera_2d.gd" id="1_vnygd"]
+[ext_resource type="Script" uid="uid://b7m317d3qbm3h" path="res://camera_2d.gd" id="1_vnygd"]
 [ext_resource type="Texture2D" uid="uid://b337umj4rhfuj" path="res://new color rect.png" id="1_yaf18"]
 [ext_resource type="Texture2D" uid="uid://dahkvh5jqef6v" path="res://sign.png" id="2_pem0l"]
 [ext_resource type="FontFile" uid="uid://bnxaswqwgr445" path="res://PublicPixel.ttf" id="3_j6lok"]
 [ext_resource type="AudioStream" uid="uid://dyso5tx7ykgae" path="res://bep.wav" id="4_om5lr"]
 [ext_resource type="PackedScene" uid="uid://2qgc53auipq4" path="res://musicPlayer.tscn" id="5_bqyg8"]
 [ext_resource type="PackedScene" uid="uid://tvojw5p36vy0" path="res://menuForPause.tscn" id="6_gqvxl"]
-[ext_resource type="Script" path="res://addons/post_processing/node/post_process.gd" id="7_8c4dy"]
+[ext_resource type="Script" uid="uid://bveyad6533wao" path="res://addons/post_processing/node/post_process.gd" id="7_8c4dy"]
 [ext_resource type="Texture2D" uid="uid://ckeagq4dqq3on" path="res://button but white.png" id="7_q0x5g"]
-[ext_resource type="Script" path="res://ButtonClose.gd" id="8_181nv"]
-[ext_resource type="Script" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="8_ax620"]
+[ext_resource type="Script" uid="uid://bttb8asti7ipt" path="res://ButtonClose.gd" id="8_181nv"]
+[ext_resource type="Script" uid="uid://wrgdgc4ylxd" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="8_ax620"]
 [ext_resource type="Texture2D" uid="uid://b6p65rdhjjtto" path="res://exit.png" id="9_ni4ct"]
 [ext_resource type="AudioStream" uid="uid://b2bluje5w12e4" path="res://click.wav" id="10_8x4hp"]
 
@@ -198,19 +198,19 @@ offset_left = -296.0
 offset_top = -69.0
 offset_right = 566.0
 offset_bottom = 139.0
-theme_override_colors/background_color = Color(0, 0, 0, 0)
-theme_override_colors/font_color = Color(0, 0, 0, 0)
-theme_override_colors/font_selected_color = Color(0, 0, 0, 0)
-theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
-theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_colors/selection_color = Color(0, 0, 0, 0)
-theme_override_colors/current_line_color = Color(0, 0, 0, 0)
-theme_override_colors/caret_color = Color(0, 0, 0, 0)
-theme_override_colors/caret_background_color = Color(0, 0, 0, 0)
 theme_override_colors/word_highlighted_color = Color(0, 0, 0, 0)
-theme_override_colors/search_result_color = Color(0, 0, 0, 0)
+theme_override_colors/current_line_color = Color(0, 0, 0, 0)
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0)
+theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/selection_color = Color(0, 0, 0, 0)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 0)
+theme_override_colors/caret_background_color = Color(0, 0, 0, 0)
+theme_override_colors/caret_color = Color(0, 0, 0, 0)
 theme_override_colors/search_result_border_color = Color(0, 0, 0, 0)
+theme_override_colors/search_result_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("3_j6lok")
 theme_override_font_sizes/font_size = 46
 theme_override_styles/read_only = SubResource("StyleBoxFlat_uk2ya")
@@ -276,19 +276,19 @@ offset_bottom = 56.0
 scale = Vector2(0.65, 0.65)
 focus_mode = 0
 mouse_filter = 1
-theme_override_colors/background_color = Color(1, 1, 1, 0)
-theme_override_colors/font_color = Color(0, 0, 0, 0)
-theme_override_colors/font_selected_color = Color(0, 0, 0, 0)
-theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
-theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_colors/selection_color = Color(0, 0, 0, 0)
-theme_override_colors/current_line_color = Color(0, 0, 0, 0)
-theme_override_colors/caret_color = Color(0, 0, 0, 0)
-theme_override_colors/caret_background_color = Color(0, 0, 0, 0)
 theme_override_colors/word_highlighted_color = Color(0, 0, 0, 0)
-theme_override_colors/search_result_color = Color(0, 0, 0, 0)
+theme_override_colors/current_line_color = Color(0, 0, 0, 0)
+theme_override_colors/background_color = Color(1, 1, 1, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0)
+theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/selection_color = Color(0, 0, 0, 0)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 0)
+theme_override_colors/caret_background_color = Color(0, 0, 0, 0)
+theme_override_colors/caret_color = Color(0, 0, 0, 0)
 theme_override_colors/search_result_border_color = Color(0, 0, 0, 0)
+theme_override_colors/search_result_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("3_j6lok")
 theme_override_font_sizes/font_size = 46
 theme_override_styles/read_only = SubResource("StyleBoxFlat_uk2ya")
@@ -316,11 +316,11 @@ offset_left = 855.331
 offset_top = -241.457
 offset_right = 921.331
 offset_bottom = -175.457
-theme_override_styles/normal = SubResource("StyleBoxFlat_q7f8j")
+theme_override_styles/focus = SubResource("StyleBoxFlat_q7f8j")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_q7f8j")
 theme_override_styles/hover = SubResource("StyleBoxFlat_q7f8j")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q7f8j")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_q7f8j")
-theme_override_styles/focus = SubResource("StyleBoxFlat_q7f8j")
+theme_override_styles/normal = SubResource("StyleBoxFlat_q7f8j")
 script = ExtResource("8_181nv")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Notification/Button"]

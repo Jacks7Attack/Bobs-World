@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c8tlvaxymgu2v"]
 
-[ext_resource type="Script" path="res://cannon_ball.gd" id="1_88ekw"]
+[ext_resource type="Script" uid="uid://0b7if27gjn1k" path="res://cannon_ball.gd" id="1_88ekw"]
 [ext_resource type="Texture2D" uid="uid://b8xv5rg38ut1d" path="res://cannon ball.png" id="1_l4soc"]
 [ext_resource type="AudioStream" uid="uid://c12m7bpu108a7" path="res://cannon ball hit.wav" id="3_r6ucp"]
 

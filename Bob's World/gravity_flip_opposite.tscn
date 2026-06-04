@@ -1,13 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://ch0tanaygeqg3"]
 
-[ext_resource type="Script" path="res://gravity flip test.gd" id="1_t57ga"]
+[ext_resource type="Script" uid="uid://dxxpdfbs5urj" path="res://gravity flip test.gd" id="1_t57ga"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b85oo"]
 size = Vector2(28, 21)
 
 [sub_resource type="Curve" id="Curve_njkwo"]
-min_value = -360.0
-max_value = 360.0
+_limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
 point_count = 2
 

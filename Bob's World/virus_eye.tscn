@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bmwerdedbcem4"]
 
-[ext_resource type="Script" path="res://virus_eye.gd" id="1_51mol"]
+[ext_resource type="Script" uid="uid://cnc0mkrsjev33" path="res://virus_eye.gd" id="1_51mol"]
 [ext_resource type="Texture2D" uid="uid://bnl4es787vv8b" path="res://eye base.png" id="2_q168k"]
 [ext_resource type="Texture2D" uid="uid://dknra4aggugsl" path="res://eye.png" id="3_lorax"]
 [ext_resource type="Texture2D" uid="uid://dialswrnypvdl" path="res://test.png" id="3_vj480"]
